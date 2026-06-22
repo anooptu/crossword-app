@@ -1,0 +1,10 @@
+BAT,Used by a batter to hit the ball
+BALL,Bowler throws this toward the batter
+WICKET,Three stumps with two bails
+RUN,Basic unit of scoring in cricket
+SIX,Ball hit over the boundary without bouncing
+FOUR,Ball reaches the boundary after bouncing
+BOWLER,Player who delivers the ball
+UMPIRE,Official who makes decisions on the field
+CATCH,How a fielder can dismiss a batter before the ball bounces
+FIELD,Area where cricket is played
