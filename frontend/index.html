@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC Cricket Crossword</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Logged-out view -->
+        <div id="logged-out-view">
+            <p class="event-kicker">Run by ABC</p>
+            <h1>ABC Cricket Crossword</h1>
+            <p class="event-subtitle">A quick cricket crossword with simple clues about rules, scoring, and match play.</p>
+            <div>
+                <a href="/login" class="btn">Login</a>
+                <a href="/signup" class="btn">Sign Up</a>
+            </div>
+            <div>
+                <a href="/admin-login" class="btn btn-admin">Admin Panel</a>
+                <a href="/help" class="btn btn-secondary">Help</a>
+            </div>
+        </div>
+
+        <!-- Logged-in view -->
+        <div id="logged-in-view" style="display: none;">
+            <p class="event-kicker">Run by ABC</p>
+            <h1>Welcome, <span id="username-placeholder"></span>!</h1>
+            <p id="home-message">Ready for your one official cricket crossword attempt?</p>
+            <div class="game-story">
+                <h2>ABC Cricket Crossword</h2>
+                <p>Test your cricket basics with clues about batting, bowling, scoring, and fielding.</p>
+            </div>
+            <div id="new-attempt-actions">
+                <a href="play.html" class="btn">Start Game</a>
+                <button id="logout-btn" class="btn btn-secondary">Logout</button>
+            </div>
+            <div id="attempted-actions" style="display: none;">
+                <a href="leaderboard.html" class="btn">Leaderboard</a>
+                <button id="attempted-logout-btn" class="btn btn-secondary">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const loggedOutView = document.getElementById('logged-out-view');
+            const loggedInView = document.getElementById('logged-in-view');
+            const usernamePlaceholder = document.getElementById('username-placeholder');
+            const homeMessage = document.getElementById('home-message');
+            const newAttemptActions = document.getElementById('new-attempt-actions');
+            const attemptedActions = document.getElementById('attempted-actions');
+
+            try {
+                const response = await fetch('/api/session/status');
+                const data = await response.json();
+
+                if (data.loggedIn) {
+                    usernamePlaceholder.textContent = data.user.username;
+                    if (data.hasAttempted) {
+                        homeMessage.textContent = 'Thank you for playing the ABC Cricket Crossword. You have already used your one official attempt.';
+                        newAttemptActions.style.display = 'none';
+                        attemptedActions.style.display = 'block';
+                    } else {
+                        homeMessage.textContent = 'Ready for your one official cricket crossword attempt?';
+                        newAttemptActions.style.display = 'block';
+                        attemptedActions.style.display = 'none';
+                    }
+                    loggedOutView.style.display = 'none';
+                    loggedInView.style.display = 'block';
+                } else {
+                    loggedOutView.style.display = 'block';
+                    loggedInView.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error checking session status:', error);
+                // Show logged-out view by default if there's an error
+                loggedOutView.style.display = 'block';
+                loggedInView.style.display = 'none';
+            }
+        });
+
+
+        // Logout
+        const logoutButtons = [
+            document.getElementById('logout-btn'),
+            document.getElementById('attempted-logout-btn')
+        ];
+
+        logoutButtons.forEach((logoutBtn) => {
+            if (!logoutBtn) return;
+            logoutBtn.addEventListener('click', async () => {
+                try {
+                    const response = await fetch('/api/logout', { method: 'POST' });
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        alert('Logout failed.');
+                    }
+                } catch (error) {
+                    console.error('Logout error:', error);
+                    alert('An error occurred during logout.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

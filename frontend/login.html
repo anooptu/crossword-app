@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC Cricket Crossword Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <p class="event-kicker">Run by ABC</p>
+        <h1>Participant Login</h1>
+        <p class="event-subtitle">Sign in to begin your official crossword attempt.</p>
+        <form id="login-form">
+            <div id="message" style="display: none;"></div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p>Ready to play? <a href="/signup">Create your participant account</a></p>
+        <a href="/" class="btn btn-secondary">Back to Cricket Home</a>
+    </div>
+    <script src="/js/login.js"></script>
+</body>
+</html>

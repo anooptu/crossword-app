@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC Cricket Crossword</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <p class="event-kicker">Run by ABC</p>
+        <h1>Cricket Crossword</h1>
+        <p class="event-subtitle">One attempt. Solve simple clues about cricket rules, scoring, and gameplay.</p>
+        <div id="game-section">
+            <div id="timer">00:00</div>
+            <div id="crossword-grid"></div>
+            <div class="clues-container">
+                <div class="clues-column">
+                    <h2>Across</h2>
+                    <ul id="across-clues"></ul>
+                </div>
+                <div class="clues-column">
+                    <h2>Down</h2>
+                    <ul id="down-clues"></ul>
+                </div>
+            </div>
+            <button id="submit-btn" class="btn">Submit Answers</button>
+        </div>
+    </div>
+
+    <div id="game-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title"></h2>
+            <p id="modal-message"></p>
+            <div id="modal-buttons" class="modal-buttons">
+                <button id="modal-confirm-btn" class="btn">Confirm</button>
+                <button id="modal-cancel-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/crossword.js"></script>
+</body>
+</html>
